@@ -5,19 +5,16 @@ import MessageCard from './message-card';
 
 
 const App = () => {
-  const [message, setMessage] = useState('');
-  const [socketUrl, setSocketUrl] = useState('ws://localhost:9899/ws');
   const [messageHistory, setMessageHistory] = useState([]);
-  const [sendMessage, lastMessage, readyState, getWebSocket] = useWebSocket(socketUrl);
+  const [sendMessage, lastMessage, readyState, getWebSocket] = useWebSocket('ws://localhost:9899/ws');
 
   useEffect(() => {
     if (lastMessage !== null) {
       const currentWebSocketUrl = getWebSocket().url;
 
-      console.log(lastMessage)
       setMessageHistory(prev => prev.concat(lastMessage));
     }
-  }, [lastMessage]);
+  }, [ lastMessage ]);
 
     console.log(readyState);
 
@@ -32,7 +29,7 @@ const App = () => {
 
   const submitMessage = ({ target: { value }, charCode }) => {
     if (charCode === 13) {
-      sendMessage(JSON.stringify({ msg: value, author: 'anon' }))
+      sendMessage(JSON.stringify({ msg: value, author: 'anon' }));
       inputMessageRef.current.value = '';
     }
   };
@@ -42,8 +39,11 @@ const App = () => {
     <div className="App">
       <div>
         <span>The WebSocket is currently {connectionStatus}</span>
-          <input type="text" onKeyPress={submitMessage} ref={inputMessageRef}/>
-          <div> { lastMessage ? lastMessage.data : null } </div>
+        <input type="text" onKeyPress={submitMessage} ref={inputMessageRef}/>
+        <div> { lastMessage ? lastMessage.data : null } </div>
+        <ul>
+          { messageHistory.map((message, idx) => <span key={idx}>{message.data}</span>) }
+        </ul>
       </div>
       <header>
       </header>
