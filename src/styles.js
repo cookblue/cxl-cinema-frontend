@@ -12,15 +12,18 @@ const useStyles = makeStyles({
   },
   messageContainer: {
     width: '100%',
-    background: 'blue',
+    background: 'transparent',
     display: 'flex'
   },
   message: {
-    background: 'white',
+    background: 'transparent',
     lineHeight: '1.225',
     display: 'flex',
     margin: '5px',
-    width: '100%'
+    width: '100%',
+    padding: '4px',
+    fontSize: '0.8rem',
+    color: 'white'
   }
 
 });
