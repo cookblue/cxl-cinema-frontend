@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect, useRef } from 'react';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
 
 import MessageCard from './message-card';
-
+import ChatCard from './chat-card';
 
 const App = () => {
   const [messageHistory, setMessageHistory] = useState([]);
@@ -14,9 +14,9 @@ const App = () => {
 
       setMessageHistory(prev => prev.concat(lastMessage));
     }
-  }, [ lastMessage ]);
+  }, [getWebSocket, lastMessage]);
 
-    console.log(readyState);
+  console.log(readyState);
 
   const connectionStatus = {
     [ReadyState.CONNECTING]: 'Connecting',
@@ -37,17 +37,15 @@ const App = () => {
 
   return (
     <div className="App">
-      <div>
+      {/* <div>
         <span>The WebSocket is currently {connectionStatus}</span>
-        <input type="text" onKeyPress={submitMessage} ref={inputMessageRef}/>
-        <div> { lastMessage ? lastMessage.data : null } </div>
+        <input type="text" onKeyPress={submitMessage} ref={inputMessageRef} />
+        <div> {lastMessage ? lastMessage.data : null} </div>
         <ul>
-          { messageHistory.map((message, idx) => <span key={idx}>{message.data}</span>) }
+          {messageHistory.map((message, idx) => <span key={idx}>{message.data}</span>)}
         </ul>
-      </div>
-      <header>
-      </header>
-      <MessageCard />
+      </div> */}
+      <ChatCard />
     </div>
   );
 };
