@@ -1,8 +1,7 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
 
-import MessageCard from './message-card';
-import ChatCard from './chat-card';
+import Container from './container'
 
 const App = () => {
   const [messageHistory, setMessageHistory] = useState([]);
@@ -45,7 +44,8 @@ const App = () => {
           {messageHistory.map((message, idx) => <span key={idx}>{message.data}</span>)}
         </ul>
       </div> */}
-      <ChatCard />
+      <Container />
+
     </div>
   );
 };
