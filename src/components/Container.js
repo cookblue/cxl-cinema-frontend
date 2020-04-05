@@ -1,9 +1,8 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
-import ChatCard from './chat-card'
-import Input from './input'
-import VideoContainer from './video-container'
+import Input from '../input'
+import VideoContainer from './VideoContainer'
 
 const useStyles = makeStyles({
   container: {
@@ -25,7 +24,6 @@ function Container() {
   return (
     <Box className={classes.container}>
       <Box className={classes.chatVideo}>
-        <ChatCard />
         <VideoContainer />
       </Box>
       <Input />

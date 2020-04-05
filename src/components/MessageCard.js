@@ -3,10 +3,11 @@ import Card from '@material-ui/core/Card';
 import Box from '@material-ui/core/Box';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
-import useStyles from './styles.js'
+import useStyles from '../styles.js'
 
 function MessageCard() {
   const classes = useStyles()
+
   return (
     <Card className={classes.card}>
       <Box className={classes.avatar}>
@@ -18,8 +19,8 @@ function MessageCard() {
           ddfsdf Lorem ipsum, dolor sit amet consectetur adipisicing elit.
         </Typography>
       </Box>
-    </Card>
+    </Card >
   )
 }
 
-export default MessageCard 
+export default MessageCard

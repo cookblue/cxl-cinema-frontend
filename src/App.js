@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
 
-import Container from './container'
+import Container from './components/Container'
 
 const App = () => {
   const [messageHistory, setMessageHistory] = useState([]);
@@ -38,7 +38,7 @@ const App = () => {
   const inputMessageRef = useRef('');
 
   const submitMessage = ({ value, charCode }, ref) => {
-    if (charCode === 13) {
+    if (charCode === 13 && value.trim() !== '') {
       sendMessage(JSON.stringify({ msg: value, author: 'anon' }));
       ref.current.value = '';
     }
@@ -46,16 +46,16 @@ const App = () => {
 
   return (
     <div className="App">
-      <div>
-        <span>The WebSocket is currently {connectionStatus}</span>
-        <input type="text"
-               onKeyPress={({ target: { value }, charCode }) => submitMessage({ value, charCode }, inputMessageRef)}
-               ref={inputMessageRef} />
-        <ul>
-          { messageHistory.map((message, idx) => message.msg && <li key={idx}>{message.msg}</li>) }
-        </ul>
-      </div>
-      {/*<Container />*/}
+      {/*<div>*/}
+      {/*  <span>The WebSocket is currently {connectionStatus}</span>*/}
+      {/*  <input type="text"*/}
+      {/*         onKeyPress={({ target: { value }, charCode }) => submitMessage({ value, charCode }, inputMessageRef)}*/}
+      {/*         ref={inputMessageRef} />*/}
+      {/*  <ul>*/}
+      {/*    { messageHistory.map((message, idx) => message.msg && <li key={idx}>{message.msg}</li>) }*/}
+      {/*  </ul>*/}
+      {/*</div>*/}
+      <Container />
 
     </div>
   );

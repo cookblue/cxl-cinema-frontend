@@ -38,13 +38,12 @@ function Input() {
   return (
     <Box className={classes.containerInput}>
       <IconButton className={classes.emoji} aria-label='emoji'>
-        <MoodIcon />
+        <MoodIcon size='small' />
       </IconButton>
       <InputBase className={classes.input} placeholder='Escribe tu mensaje'>
-
       </InputBase>
       <IconButton className={classes.submit} aria-label='send'>
-        <SendIcon />
+        <SendIcon size='small' />
       </IconButton>
     </Box>
   )
