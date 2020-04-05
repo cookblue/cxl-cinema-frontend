@@ -1,7 +1,7 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
-import Input from '../input'
+import InputMessage from './InputMessage'
 import VideoContainer from './VideoContainer'
 
 const useStyles = makeStyles({
@@ -19,14 +19,14 @@ const useStyles = makeStyles({
   },
 });
 
-function Container() {
+function Container({ ref, children }) {
   const classes = useStyles();
   return (
     <Box className={classes.container}>
       <Box className={classes.chatVideo}>
-        <VideoContainer />
+        { children }
       </Box>
-      <Input />
+      <InputMessage ref={ref}/>
     </Box>
   );
 }

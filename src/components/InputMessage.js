@@ -33,15 +33,15 @@ const useStyles = makeStyles({
   }
 })
 
-function Input() {
-  const classes = useStyles()
+function InputMessage({ ref }) {
+  const classes = useStyles();
+
   return (
     <Box className={classes.containerInput}>
       <IconButton className={classes.emoji} aria-label='emoji'>
         <MoodIcon size='small' />
       </IconButton>
-      <InputBase className={classes.input} placeholder='Escribe tu mensaje'>
-      </InputBase>
+      <InputBase className={classes.input} placeholder='Write a message' ref={ref}/>
       <IconButton className={classes.submit} aria-label='send'>
         <SendIcon size='small' />
       </IconButton>
@@ -49,4 +49,4 @@ function Input() {
   )
 }
 
-export default Input
+export default InputMessage

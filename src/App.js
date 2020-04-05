@@ -1,7 +1,8 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
 
-import Container from './components/Container'
+import Container from './components/Container';
+import VideoContainer from './components/VideoContainer';
 
 const App = () => {
   const [messageHistory, setMessageHistory] = useState([]);
@@ -46,17 +47,19 @@ const App = () => {
 
   return (
     <div className="App">
-      {/*<div>*/}
-      {/*  <span>The WebSocket is currently {connectionStatus}</span>*/}
-      {/*  <input type="text"*/}
-      {/*         onKeyPress={({ target: { value }, charCode }) => submitMessage({ value, charCode }, inputMessageRef)}*/}
-      {/*         ref={inputMessageRef} />*/}
-      {/*  <ul>*/}
-      {/*    { messageHistory.map((message, idx) => message.msg && <li key={idx}>{message.msg}</li>) }*/}
-      {/*  </ul>*/}
-      {/*</div>*/}
-      <Container />
+      <div>
+        <span>The WebSocket is currently {connectionStatus}</span>
+        <input type="text"
+               onKeyPress={({ target: { value }, charCode }) => submitMessage({ value, charCode }, inputMessageRef)}
+               ref={inputMessageRef} />
+        <ul>
+          { messageHistory.map((message, idx) => message.msg && <li key={idx}>{message.msg}</li>) }
+        </ul>
 
+        <Container ref={inputMessageRef}>
+          <VideoContainer />
+        </Container>
+      </div>
     </div>
   );
 };
