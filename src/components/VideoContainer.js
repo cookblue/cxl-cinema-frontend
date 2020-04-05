@@ -18,18 +18,18 @@ const useStyles = makeStyles({
   }
 })
 
-
-function VideoContainer() {
+function VideoContainer({ messages, srcVideo }) {
   const classes = useStyles()
+
   return (
     <Box className={classes.videoContainer} >
       <video controls className={classes.video} >
         <source
-          src='video.mp4'
+          src={srcVideo}
           type="video/mp4" />
       </video>
       <Box style={{ position: 'absolute' }}>
-        <ChatCard />
+        <ChatCard messages={messages} />
       </Box>
     </Box >
   )
