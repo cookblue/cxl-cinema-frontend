@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Fade from 'react-reveal/Fade';
 import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
-import MessageCard from './MessageCard'
+import MessageCard from './message-card'
 
 const useStyles = makeStyles({
   container: {
@@ -12,17 +12,16 @@ const useStyles = makeStyles({
     border: '1px solid #fcfbfe '
   },
   messageIn: {
-    margin: '8px 0px 0px 5px',
+    margin: '8px 5px 0px 5px',
     display: 'flex',
     justifyContent: 'flex-start'
   },
   messageOut: {
-    margin: '8px 0px 0px 5px',
+    margin: '8px 5px 0px 5px',
     display: 'flex',
     justifyContent: 'flex-end'
   }
-});
-
+})
 
 
 function ChatCard() {
@@ -34,14 +33,14 @@ function ChatCard() {
   }
 
   return (
-    <Box className={classes.container}>
+    <Box className={classes.container} onClick={handleClick}>
       <Fade top when={show}>
-        <Box className={classes.messageIn} onClick={handleClick}>
+        <Box className={classes.messageIn}>
           <MessageCard />
         </Box>
       </Fade>
-      <Fade top when={show}>
-        <Box className={classes.messageOut} onClick={handleClick}>
+      <Fade>
+        <Box className={classes.messageOut}>
           <MessageCard />
         </Box>
       </Fade>
