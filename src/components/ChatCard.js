@@ -26,22 +26,32 @@ const useStyles = makeStyles({
 
 
 function ChatCard() {
-  const [show, setShow] = useState(true)
+  const [show, setShow] = useState({
+    showIn: true,
+    showOut: true
+  })
   const classes = useStyles()
 
-  function handleClick() {
-    setShow(false)
+  function handleClickIn() {
+    setShow({
+      showIn: false,
+    })
+  }
+  function handleClickOut() {
+    setShow({
+      showOut: false
+    })
   }
 
   return (
     <Box className={classes.container}>
-      <Fade top when={show}>
-        <Box className={classes.messageIn} onClick={handleClick}>
+      <Fade top when={show.showIn}>
+        <Box className={classes.messageIn} onClick={handleClickIn}>
           <MessageCard />
         </Box>
       </Fade>
-      <Fade top when={show}>
-        <Box className={classes.messageOut} onClick={handleClick}>
+      <Fade top when={show.showOut}>
+        <Box className={classes.messageOut} onClick={handleClickOut}>
           <MessageCard />
         </Box>
       </Fade>
