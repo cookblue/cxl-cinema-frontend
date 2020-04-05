@@ -6,25 +6,36 @@ import VideoContainer from './components/VideoContainer';
 import InputMessage from './components/InputMessage';
 
 const App = () => {
+  const [srcVideo, setSrcVideo] = useState('');
   const [messageHistory, setMessageHistory] = useState([]);
   const [sendMessage, lastMessage, readyState, getWebSocket] = useWebSocket('ws://localhost:9899/ws');
+
+  const retrieveMessage = (message) => {
+    if (messageHistory.length === 20) {
+      setMessageHistory(prev => {
+        const [, ...rest] = prev;
+
+        return [...rest, message];
+      });
+    } else {
+      setMessageHistory(prev => [...prev, message]);
+    }
+  };
+
+  const retrieveCommand = (message) => {
+    if (message.command === 'video') {
+      setSrcVideo(message.argument);
+    }
+  };
+
 
   useEffect(() => {
     if (lastMessage !== null) {
       const currentWebSocketUrl = getWebSocket().url;
 
-      console.log(lastMessage.data);
-      const newMessage = JSON.parse(lastMessage.data);
+      const last = JSON.parse(lastMessage.data);
 
-      if (messageHistory.length === 20) {
-        setMessageHistory(prev => {
-          const [, ...rest] = prev;
-
-          return [...rest, newMessage];
-        });
-      } else {
-        setMessageHistory(prev => [...prev, newMessage]);
-      }
+      last.msg ? retrieveMessage(last) : retrieveCommand(last);
     }
   }, [ getWebSocket, lastMessage ]);
 
@@ -42,7 +53,7 @@ const App = () => {
       <div>
        <Container
           inputMessage={<InputMessage sendMessage={sendMessage} />}
-          videoContainer={<VideoContainer messages={messageHistory}/>}
+          videoContainer={<VideoContainer messages={messageHistory} srcVideo={srcVideo}/>}
         />
       </div>
     </div>

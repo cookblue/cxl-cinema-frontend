@@ -11,11 +11,12 @@ const useStyles = makeStyles({
   }
 })
 
-function VideoContainer({ messages }) {
+function VideoContainer({ messages, srcVideo }) {
   const classes = useStyles()
   return (
     <Box className={classes.videoContainer}>
       <ChatCard messages={messages} />
+      {/*{ srcVideo }*/}
     </Box>
   )
 }
