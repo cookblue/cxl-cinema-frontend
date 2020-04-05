@@ -7,16 +7,15 @@ const useStyles = makeStyles({
   videoContainer: {
     width: '100%',
     height: '92vh',
-    background: 'black'
+    background: 'gray'
   }
 })
 
-function VideoContainer() {
+function VideoContainer({ messages }) {
   const classes = useStyles()
   return (
     <Box className={classes.videoContainer}>
-      <ChatCard />
-
+      <ChatCard messages={messages} />
     </Box>
   )
 }

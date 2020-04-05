@@ -1,8 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
-import InputMessage from './InputMessage'
-import VideoContainer from './VideoContainer'
 
 const useStyles = makeStyles({
   container: {
@@ -19,14 +17,15 @@ const useStyles = makeStyles({
   },
 });
 
-const Container = React.forwardRef(({ children, sendMessage }, ref) => {
+const Container = React.forwardRef(({ videoContainer, inputMessage }) => {
   const classes = useStyles();
+
   return (
     <Box className={classes.container}>
       <Box className={classes.chatVideo}>
-        { children }
+        { videoContainer }
       </Box>
-      <InputMessage ref={ref} sendMessage={sendMessage} />
+      { inputMessage }
     </Box>
   );
 });

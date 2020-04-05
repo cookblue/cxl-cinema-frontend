@@ -3,6 +3,7 @@ import useWebSocket, { ReadyState } from 'react-use-websocket';
 
 import Container from './components/Container';
 import VideoContainer from './components/VideoContainer';
+import InputMessage from './components/InputMessage';
 
 const App = () => {
   const [messageHistory, setMessageHistory] = useState([]);
@@ -25,7 +26,7 @@ const App = () => {
         setMessageHistory(prev => [...prev, newMessage]);
       }
     }
-  }, [getWebSocket, lastMessage]);
+  }, [ getWebSocket, lastMessage ]);
 
   console.log(readyState);
 
@@ -36,21 +37,13 @@ const App = () => {
     [ReadyState.CLOSED]: 'Closed',
   }[readyState];
 
-
   return (
     <div className="App">
       <div>
-        <span>The WebSocket is currently {connectionStatus}</span>
-        <input type="text"
-
-                />
-        <ul>
-          { messageHistory.map((message, idx) => message.msg && <li key={idx}>{message.msg}</li>) }
-        </ul>
-
-        <Container sendMessage={sendMessage}>
-          <VideoContainer />
-        </Container>
+       <Container
+          inputMessage={<InputMessage sendMessage={sendMessage} />}
+          videoContainer={<VideoContainer messages={messageHistory}/>}
+        />
       </div>
     </div>
   );

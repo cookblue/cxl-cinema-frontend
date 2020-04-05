@@ -26,7 +26,6 @@ const useStyles = makeStyles({
     fontSize: '0.8rem',
     color: 'white'
   }
-
 });
 
 export default useStyles
