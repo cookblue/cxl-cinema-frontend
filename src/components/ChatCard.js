@@ -9,17 +9,15 @@ const useStyles = makeStyles({
     width: '40vh',
     height: '80vh',
     background: 'transparent',
+    display: 'flex',
+    overflow: 'scroll',
+    flexDirection: 'column'
   },
-  messageIn: {
+  messageContainer: {
     margin: '8px 5px 0px 5px',
     display: 'flex',
     justifyContent: 'flex-start'
   },
-  messageOut: {
-    margin: '8px 5px 0px 5px',
-    display: 'flex',
-    justifyContent: 'flex-end'
-  }
 });
 
 
@@ -30,7 +28,7 @@ const FadeCard = ({ message }) => {
   useEffect(() => {
     setTimeout(() => {
       setVisible(false);
-    }, 3000)
+    }, 500000)
   }, []);
 
   return (
