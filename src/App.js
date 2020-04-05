@@ -11,19 +11,12 @@ const App = () => {
   const [sendMessage, lastMessage, readyState, getWebSocket] = useWebSocket('ws://bb16f54a.ngrok.io/ws');
 
   const containerRef = useRef('');
-  const retrieveMessage = (message) => {
-    if (messageHistory.length === 20) {
-      setMessageHistory(prev => {
-        const [, ...rest] = prev;
 
-        return [...rest, message];
-      });
-    } else {
-      setMessageHistory(prev => [...prev, message]);
-    }
+  const retrieveMessage = (message) => {
+    setMessageHistory(prev => [...prev, message]);
     setTimeout(() => {
       containerRef.current.scrollTop = 10000000000000000000000;
-    }, 100)
+    }, 150);
   };
 
   const retrieveCommand = (message) => {

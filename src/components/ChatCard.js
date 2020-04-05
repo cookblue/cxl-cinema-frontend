@@ -30,7 +30,7 @@ const FadeCard = ({ message }) => {
     setTimeout(() => {
       setVisible(false);
     }, TIME_TO_DISAPPEAR);
-  }, []);
+  }, [message]);
 
   return (
     <>
@@ -49,7 +49,9 @@ const ChatCard = React.forwardRef(({ messages }, ref) => {
     <div className={classes.container} ref={ref}>
       {
         messages.map((message, idx) => {
-          return message.msg && <FadeCard key={idx} message={message.msg} />
+          const indexToShow = messages.length > 20 ? messages.length - 20 : 0;
+
+          return message.msg && idx >= indexToShow && <FadeCard key={idx} message={message.msg} />
         })
       }
     </div>
