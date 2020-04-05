@@ -9,7 +9,8 @@ const useStyles = makeStyles({
     background: '#000000bf',
     display: 'flex',
     width: '30vh',
-    opacity: '1'
+    opacity: '1',
+    wordBreak: 'break-all'
   },
   messageContainer: {
     width: '100%',
