@@ -7,23 +7,21 @@ import MessageCard from './MessageCard'
 const useStyles = makeStyles({
   container: {
     width: '40vh',
-    height: '93vh',
+    height: '80vh',
     background: 'transparent',
     border: '1px solid #fcfbfe '
   },
   messageIn: {
-    margin: '8px 0px 0px 5px',
+    margin: '8px 5px 0px 5px',
     display: 'flex',
     justifyContent: 'flex-start'
   },
   messageOut: {
-    margin: '8px 0px 0px 5px',
+    margin: '8px 5px 0px 5px',
     display: 'flex',
     justifyContent: 'flex-end'
   }
 });
-
-
 
 function ChatCard() {
   const [show, setShow] = useState({
