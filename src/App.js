@@ -1,5 +1,5 @@
-import React, { useState, useCallback, useEffect, useRef } from 'react';
-import useWebSocket, { ReadyState } from 'react-use-websocket';
+import React, { useState, useEffect, useRef } from 'react';
+import useWebSocket from 'react-use-websocket';
 
 import Container from './components/Container';
 import VideoContainer from './components/VideoContainer';
@@ -8,12 +8,15 @@ import InputMessage from './components/InputMessage';
 const App = () => {
   const [srcVideo, setSrcVideo] = useState('');
   const [messageHistory, setMessageHistory] = useState([]);
-  const [sendMessage, lastMessage, readyState, getWebSocket] = useWebSocket('ws://bb16f54a.ngrok.io/ws');
+  const [sendMessage, lastMessage] = useWebSocket('ws://localhost:9899/ws');
 
   const containerRef = useRef('');
 
-  const retrieveMessage = (message) => {
-    setMessageHistory(prev => [...prev, message]);
+  const retrieveMessage = (message, containerRef) => {
+    setMessageHistory(prev => {
+      return [...prev, message]
+    });
+
     setTimeout(() => {
       containerRef.current.scrollTop = 10000000000000000000000;
     }, 150);
@@ -25,23 +28,13 @@ const App = () => {
     }
   };
 
-
   useEffect(() => {
     if (lastMessage !== null) {
-      const currentWebSocketUrl = getWebSocket().url;
-
       const last = JSON.parse(lastMessage.data);
 
-      last.msg ? retrieveMessage(last) : retrieveCommand(last);
+      last.msg ? retrieveMessage(last, containerRef) : retrieveCommand(last);
     }
-  }, [getWebSocket, lastMessage]);
-
-  const connectionStatus = {
-    [ReadyState.CONNECTING]: 'Connecting',
-    [ReadyState.OPEN]: 'Open',
-    [ReadyState.CLOSING]: 'Closing',
-    [ReadyState.CLOSED]: 'Closed',
-  }[readyState];
+  }, [lastMessage]);
 
   return (
     <div className="App">
