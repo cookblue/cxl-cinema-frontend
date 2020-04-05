@@ -50,12 +50,9 @@ const App = () => {
 
   return (
     <div className="App">
-      <div>
-       <Container
-          inputMessage={<InputMessage sendMessage={sendMessage} />}
-          videoContainer={<VideoContainer messages={messageHistory} srcVideo={srcVideo}/>}
-        />
-      </div>
+      <Container
+        inputMessage={<InputMessage sendMessage={sendMessage} />}
+        videoContainer={<VideoContainer messages={messageHistory} srcVideo={srcVideo}/>} />
     </div>
   );
 };
