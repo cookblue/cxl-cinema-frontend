@@ -19,16 +19,16 @@ const useStyles = makeStyles({
   },
 });
 
-function Container({ ref, children }) {
+const Container = React.forwardRef(({ children, sendMessage }, ref) => {
   const classes = useStyles();
   return (
     <Box className={classes.container}>
       <Box className={classes.chatVideo}>
         { children }
       </Box>
-      <InputMessage ref={ref}/>
+      <InputMessage ref={ref} sendMessage={sendMessage} />
     </Box>
   );
-}
+});
 
 export default Container
