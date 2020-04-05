@@ -7,6 +7,7 @@ import useStyles from './styles.js'
 
 function MessageCard() {
   const classes = useStyles()
+
   return (
     <Card className={classes.card}>
       <Box className={classes.avatar}>
@@ -18,7 +19,7 @@ function MessageCard() {
           ddfsdf Lorem ipsum, dolor sit amet consectetur adipisicing elit.
         </Typography>
       </Box>
-    </Card>
+    </Card >
   )
 }
 

@@ -8,7 +8,8 @@ const useStyles = makeStyles({
   card: {
     background: 'grey',
     display: 'flex',
-    width: '30vh'
+    width: '30vh',
+    opacity: '1'
   },
   messageContainer: {
     width: '100%',
