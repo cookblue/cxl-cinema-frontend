@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Fade from 'react-reveal/Fade';
 import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
@@ -20,7 +20,7 @@ const useStyles = makeStyles({
   },
 });
 
-const TIME_TO_DISAPPEAR = 10000;
+const TIME_TO_DISAPPEAR = 100000;
 
 const FadeCard = ({ message }) => {
   const { messageContainer } = useStyles();
