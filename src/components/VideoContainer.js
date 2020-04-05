@@ -23,7 +23,7 @@ const VideoContainer = React.forwardRef(({ messages, srcVideo }, ref) => {
 
   return (
     <Box className={classes.videoContainer} >
-      <video controls className={classes.video} src={srcVideo} >
+      <video controls className={classes.video} src={srcVideo} autoPlay={true}>
         <source
           src={srcVideo}
           type="video/mp4" />
