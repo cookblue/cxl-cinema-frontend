@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Fade from 'react-reveal/Fade';
 import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
@@ -9,7 +9,6 @@ const useStyles = makeStyles({
     width: '40vh',
     height: '80vh',
     background: 'transparent',
-    border: '1px solid #fcfbfe '
   },
   messageIn: {
     margin: '8px 5px 0px 5px',
@@ -23,36 +22,37 @@ const useStyles = makeStyles({
   }
 });
 
-function ChatCard() {
-  const [show, setShow] = useState({
-    showIn: true,
-    showOut: true
-  })
-  const classes = useStyles()
 
-  function handleClickIn() {
-    setShow({
-      showIn: false,
-    })
-  }
-  function handleClickOut() {
-    setShow({
-      showOut: false
-    })
-  }
+const FadeCard = ({ message }) => {
+  const { messageContainer } = useStyles();
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setVisible(false);
+    }, 3000)
+  }, []);
+
+  return (
+    <>
+      <Fade top when={visible}>
+        <Box className={messageContainer}>
+          <MessageCard message={message} />
+        </Box>
+      </Fade>
+    </>);
+};
+
+function ChatCard({ messages }) {
+  const classes = useStyles();
 
   return (
     <Box className={classes.container}>
-      <Fade top when={show.showIn}>
-        <Box className={classes.messageIn} onClick={handleClickIn}>
-          <MessageCard />
-        </Box>
-      </Fade>
-      <Fade top when={show.showOut}>
-        <Box className={classes.messageOut} onClick={handleClickOut}>
-          <MessageCard />
-        </Box>
-      </Fade>
+      {
+        messages.map((message, idx) => {
+          return message.msg && <FadeCard key={idx} message={message.msg} />
+        })
+      }
     </Box>
   )
 }

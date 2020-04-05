@@ -33,7 +33,7 @@ const useStyles = makeStyles({
   }
 })
 
-const InputMessage = React.forwardRef(({ sendMessage }, ref) => {
+const InputMessage = React.forwardRef(({ sendMessage }) => {
   const classes = useStyles();
 
   const inputMessageRef = useRef('');

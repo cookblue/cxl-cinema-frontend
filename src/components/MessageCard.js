@@ -5,7 +5,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import useStyles from '../styles.js'
 
-function MessageCard() {
+function MessageCard({ message }) {
   const classes = useStyles()
 
   return (
@@ -16,7 +16,7 @@ function MessageCard() {
       </Box>
       <Box className={classes.messageContainer}>
         <Typography className={classes.message}>
-          ddfsdf Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+          { message }
         </Typography>
       </Box>
     </Card >
