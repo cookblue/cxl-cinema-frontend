@@ -18,9 +18,10 @@ const useStyles = makeStyles({
     width: '100%',
     height: '100vh'
   },
-})
+});
+
 function Container() {
-  const classes = useStyles()
+  const classes = useStyles();
   return (
     <Box className={classes.container}>
       <Box className={classes.chatVideo}>
@@ -29,7 +30,7 @@ function Container() {
       </Box>
       <Input />
     </Box>
-  )
+  );
 }
 
 export default Container

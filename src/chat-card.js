@@ -10,7 +10,7 @@ const useStyles = makeStyles({
     background: '#fcfbfe',
     border: '1px solid #fcfbfe '
   },
-})
+});
 
 
 function ChatCard() {

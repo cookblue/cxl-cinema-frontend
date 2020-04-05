@@ -11,7 +11,18 @@ const App = () => {
     if (lastMessage !== null) {
       const currentWebSocketUrl = getWebSocket().url;
 
-      setMessageHistory(prev => prev.concat(lastMessage));
+      console.log(lastMessage.data);
+      const newMessage = JSON.parse(lastMessage.data);
+
+      if (messageHistory.length === 20) {
+        setMessageHistory(prev => {
+          const [, ...rest] = prev;
+
+          return [...rest, newMessage];
+        });
+      } else {
+        setMessageHistory(prev => [...prev, newMessage]);
+      }
     }
   }, [getWebSocket, lastMessage]);
 
@@ -26,25 +37,25 @@ const App = () => {
 
   const inputMessageRef = useRef('');
 
-  const submitMessage = ({ target: { value }, charCode }) => {
+  const submitMessage = ({ value, charCode }, ref) => {
     if (charCode === 13) {
       sendMessage(JSON.stringify({ msg: value, author: 'anon' }));
-      inputMessageRef.current.value = '';
+      ref.current.value = '';
     }
   };
 
-
   return (
     <div className="App">
-      {/* <div>
+      <div>
         <span>The WebSocket is currently {connectionStatus}</span>
-        <input type="text" onKeyPress={submitMessage} ref={inputMessageRef} />
-        <div> {lastMessage ? lastMessage.data : null} </div>
+        <input type="text"
+               onKeyPress={({ target: { value }, charCode }) => submitMessage({ value, charCode }, inputMessageRef)}
+               ref={inputMessageRef} />
         <ul>
-          {messageHistory.map((message, idx) => <span key={idx}>{message.data}</span>)}
+          { messageHistory.map((message, idx) => message.msg && <li key={idx}>{message.msg}</li>) }
         </ul>
-      </div> */}
-      <Container />
+      </div>
+      {/*<Container />*/}
 
     </div>
   );
