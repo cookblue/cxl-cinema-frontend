@@ -20,7 +20,7 @@ const useStyles = makeStyles({
   },
 });
 
-const TIME_TO_DISAPPEAR = 500000;
+const TIME_TO_DISAPPEAR = 10000;
 
 const FadeCard = ({ message }) => {
   const { messageContainer } = useStyles();

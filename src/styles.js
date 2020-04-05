@@ -6,7 +6,7 @@ const useStyles = makeStyles({
     margin: '5px'
   },
   card: {
-    background: 'grey',
+    background: '#000000bf',
     display: 'flex',
     width: '30vh',
     opacity: '1'
