@@ -31,17 +31,17 @@ const useStyles = makeStyles({
     width: '90%',
 
   }
-})
+});
 
-const InputMessage = React.forwardRef(({ sendMessage }) => {
+const InputMessage = React.forwardRef(({ sendMessage } ) => {
   const classes = useStyles();
 
   const inputMessageRef = useRef('');
 
-  const submitMessage = ({ value, charCode }, ref) => {
+  const submitMessage = ({ value, charCode }, inputRef) => {
     if (charCode === 13 && value.trim() !== '') {
       sendMessage(JSON.stringify({ msg: value, author: 'anon' }));
-      ref.current.value = '';
+      inputRef.current.value = '';
     }
   };
   return (
@@ -51,7 +51,7 @@ const InputMessage = React.forwardRef(({ sendMessage }) => {
       </IconButton>
       <InputBase className={classes.input}
                  placeholder='Write a message'
-                 onKeyPress={({ target: { value }, charCode }) => submitMessage({ value, charCode }, inputMessageRef)}
+                 onKeyPress={({ target: { value }, charCode }) => submitMessage({ value, charCode }, inputMessageRef )}
                  inputRef={inputMessageRef}/>
       <IconButton className={classes.submit} aria-label='send'>
         <SendIcon size='small' />

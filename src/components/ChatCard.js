@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import Fade from 'react-reveal/Fade';
 import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
@@ -20,6 +20,7 @@ const useStyles = makeStyles({
   },
 });
 
+const TIME_TO_DISAPPEAR = 500000;
 
 const FadeCard = ({ message }) => {
   const { messageContainer } = useStyles();
@@ -28,7 +29,7 @@ const FadeCard = ({ message }) => {
   useEffect(() => {
     setTimeout(() => {
       setVisible(false);
-    }, 500000)
+    }, TIME_TO_DISAPPEAR);
   }, []);
 
   return (
@@ -41,18 +42,18 @@ const FadeCard = ({ message }) => {
     </>);
 };
 
-function ChatCard({ messages }) {
+const ChatCard = React.forwardRef(({ messages }, ref) => {
   const classes = useStyles();
 
   return (
-    <Box className={classes.container}>
+    <div className={classes.container} ref={ref}>
       {
         messages.map((message, idx) => {
           return message.msg && <FadeCard key={idx} message={message.msg} />
         })
       }
-    </Box>
+    </div>
   )
-}
+});
 
 export default ChatCard

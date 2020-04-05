@@ -18,7 +18,7 @@ const useStyles = makeStyles({
   }
 })
 
-function VideoContainer({ messages, srcVideo }) {
+const VideoContainer = React.forwardRef(({ messages, srcVideo }, ref) => {
   const classes = useStyles()
 
   return (
@@ -29,10 +29,10 @@ function VideoContainer({ messages, srcVideo }) {
           type="video/mp4" />
       </video>
       <Box style={{ position: 'absolute' }}>
-        <ChatCard messages={messages} />
+        <ChatCard messages={messages} ref={ref}/>
       </Box>
     </Box >
   )
-}
+});
 
 export default VideoContainer

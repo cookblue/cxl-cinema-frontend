@@ -10,6 +10,7 @@ const App = () => {
   const [messageHistory, setMessageHistory] = useState([]);
   const [sendMessage, lastMessage, readyState, getWebSocket] = useWebSocket('ws://bb16f54a.ngrok.io/ws');
 
+  const containerRef = useRef('');
   const retrieveMessage = (message) => {
     if (messageHistory.length === 20) {
       setMessageHistory(prev => {
@@ -20,6 +21,9 @@ const App = () => {
     } else {
       setMessageHistory(prev => [...prev, message]);
     }
+    setTimeout(() => {
+      containerRef.current.scrollTop = 10000000000000000000000;
+    }, 100)
   };
 
   const retrieveCommand = (message) => {
@@ -39,8 +43,6 @@ const App = () => {
     }
   }, [getWebSocket, lastMessage]);
 
-  console.log(readyState);
-
   const connectionStatus = {
     [ReadyState.CONNECTING]: 'Connecting',
     [ReadyState.OPEN]: 'Open',
@@ -52,7 +54,7 @@ const App = () => {
     <div className="App">
       <Container
         inputMessage={<InputMessage sendMessage={sendMessage} />}
-        videoContainer={<VideoContainer messages={messageHistory} srcVideo={srcVideo} />} />
+        videoContainer={<VideoContainer messages={messageHistory} srcVideo={srcVideo} ref={containerRef}/>} />
     </div>
   );
 };
