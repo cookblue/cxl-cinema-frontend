@@ -5,9 +5,9 @@ import MessageCard from './message-card'
 
 const useStyles = makeStyles({
   container: {
-    width: '60vh',
+    width: '40vh',
     height: '93vh',
-    background: '#fcfbfe',
+    background: 'transparent',
     border: '1px solid #fcfbfe '
   },
 })
