@@ -7,7 +7,8 @@ const useStyles = makeStyles({
     width: '100%',
     height: ' 100vh',
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    background: 'black'
   },
   chatVideo: {
     display: 'flex',
@@ -23,9 +24,9 @@ const Container = React.forwardRef(({ videoContainer, inputMessage }) => {
   return (
     <Box className={classes.container}>
       <Box className={classes.chatVideo}>
-        { videoContainer }
+        {videoContainer}
       </Box>
-      { inputMessage }
+      {inputMessage}
     </Box>
   );
 });

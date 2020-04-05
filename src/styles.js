@@ -10,7 +10,7 @@ const useStyles = makeStyles({
     display: 'flex',
     width: '30vh',
     opacity: '1',
-    wordBreak: 'break-all'
+    wordBreak: 'break-all '
   },
   messageContainer: {
     width: '100%',
