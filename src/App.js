@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import useWebSocket from 'react-use-websocket';
 
 import Container from './components/Container';
@@ -8,7 +8,13 @@ import InputMessage from './components/InputMessage';
 const App = () => {
   const [srcVideo, setSrcVideo] = useState('');
   const [messageHistory, setMessageHistory] = useState([]);
-  const [sendMessage, lastMessage] = useWebSocket('ws://localhost:9899/ws');
+
+  const STATIC_OPTIONS = useMemo(() => ({
+    onOpen: () => console.log('Connection opened!'),
+    shouldReconnect: (closeEvent) => true, //Will attempt to reconnect on all close events, such as server shutting down
+  }), []);
+
+  const [sendMessage, lastMessage] = useWebSocket('ws://localhost:9899/ws', STATIC_OPTIONS);
 
   const containerRef = useRef('');
 
@@ -24,6 +30,7 @@ const App = () => {
 
   const retrieveCommand = (message) => {
     if (message.command === 'video') {
+      localStorage.setItem('last-video', message.argument);
       setSrcVideo(message.argument);
     }
   };

@@ -37,7 +37,7 @@ const useStyles = makeStyles({
   }
 });
 
-const InputMessage = React.forwardRef(({ sendMessage } ) => {
+const InputMessage = ({ sendMessage } ) => {
   const classes = useStyles();
 
   const inputMessageRef = useRef('');
@@ -62,6 +62,6 @@ const InputMessage = React.forwardRef(({ sendMessage } ) => {
       </IconButton>
     </Box>
   )
-});
+};
 
 export default InputMessage
