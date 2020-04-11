@@ -1,4 +1,4 @@
-import React, {useRef} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
 import { IconButton, InputBase } from '@material-ui/core';
@@ -39,6 +39,14 @@ const useStyles = makeStyles({
 
 const validInternCommands = ['name'];
 
+const palette = [
+  '#0baf15', '#FD5B78', '#FF6037',
+  '#FF9966', '#FF9933', '#FFCC33',
+  '#FFFF66', '#CCFF00', '#66FF66',
+  '#50BFE6', '#FF6EFF', '#20d0a8'];
+
+const myColor = palette[Math.round(Math.random() * palette.length)];
+
 const InputMessage = ({ sendMessage } ) => {
   const classes = useStyles();
 
@@ -63,7 +71,7 @@ const InputMessage = ({ sendMessage } ) => {
       if (isNameCommand) {
         commandHandler(validInternCommands, message);
       } else {
-        sendMessage(JSON.stringify({ msg: message, author: localStorage.getItem('user-name') || 'Anonymous' }));
+        sendMessage(JSON.stringify({ msg: message, color: myColor, author: localStorage.getItem('user-name') || 'Anonymous' }));
       }
 
       inputRef.current.value = '';

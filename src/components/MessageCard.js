@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import Card from '@material-ui/core/Card';
 import Box from '@material-ui/core/Box';
 import Avatar from '@material-ui/core/Avatar';
@@ -23,6 +23,7 @@ const useStyles = makeStyles({
   },
   messageContainer: {
     margin: 'auto 4px',
+    minWidth: 50
   },
   message: {
     lineHeight: '1.225',
@@ -42,17 +43,20 @@ const useStyles = makeStyles({
   }
 });
 
-function MessageCard({ message, author }) {
-  const classes = useStyles()
-  const colors = ['#0baf15', '#FD5B78', '#FF6037', '#FF9966', '#FF9933', '#FFCC33', '#FFFF66', '#CCFF00', '#66FF66', '#50BFE6', '#FF6EFF', '#EE34D2', '#FF00CC', '#20d0a8'];
+
+
+
+function MessageCard({ message, author, color, avatar }) {
+  const classes = useStyles();
 
   return (
     <Card className={classes.card}>
-      <Box className={classes.avatarContainer}>
+      { avatar && <Box className={classes.avatarContainer}>
         <Avatar className={classes.avatar} />
-      </Box>
+      </Box> }
       <Box className={classes.messageContainer}>
-        <Typography className={classes.author} style={{ color: colors[9] }}>
+        <Typography className={classes.author}
+                    style={{ color: color }}>
           {author}
         </Typography>
         <Typography className={classes.message}>

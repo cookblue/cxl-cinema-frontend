@@ -15,7 +15,8 @@ const useStyles = makeStyles({
   chatContainer: {
     position: 'relative',
     height: '70%',
-    display: 'flex'
+    display: 'flex',
+    marginLeft: 25
   }
 });
 
