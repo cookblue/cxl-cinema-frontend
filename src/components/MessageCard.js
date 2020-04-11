@@ -16,7 +16,7 @@ const useStyles = makeStyles({
     height: 30
   },
   card: {
-    background: '#000000bf',
+    background: '#0000007d',
     display: 'flex',
     opacity: '1',
     wordBreak: 'break-all'
