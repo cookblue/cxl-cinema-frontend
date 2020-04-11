@@ -35,7 +35,7 @@ const App = () => {
       localStorage.setItem('last-video', message.argument);
       setSrcVideo(message.argument);
     }
-    if (message.command === 'set-name') {
+    if (message.command === 'name') {
       localStorage.setItem('user-name', message.argument);
     }
   };
