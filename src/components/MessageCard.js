@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react';
 import Card from '@material-ui/core/Card';
 import Box from '@material-ui/core/Box';
 import Avatar from '@material-ui/core/Avatar';
