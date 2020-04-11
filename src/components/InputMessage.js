@@ -45,7 +45,7 @@ const InputMessage = ({ sendMessage } ) => {
   const inputMessageRef = useRef('');
 
   const commandHandler = (validInternCommands, command) => {
-    const [, internCommand, argument] = command;
+    const [, internCommand, argument] = command.match(/^\/(\w*)\s(.*)/);
 
     if (validInternCommands.includes(internCommand)) {
       if (internCommand === 'name') {
@@ -55,13 +55,15 @@ const InputMessage = ({ sendMessage } ) => {
   }
 
   const submitMessage = ({ value, charCode }, inputRef) => {
-    if (charCode === 13 && value.trim() !== '') {
-      const command = value.match(/^\/(\w*)\s(.*)/);
+    const message = value.trim();
 
-      if (command) {
-        commandHandler(validInternCommands, command)
+    if (charCode === 13 && message !== '') {
+      const isNameCommand = message.split('/name')[1];
+
+      if (isNameCommand) {
+        commandHandler(validInternCommands, message);
       } else {
-        sendMessage(JSON.stringify({ msg: value, author: localStorage.getItem('user-name') || 'Anonymous' }));
+        sendMessage(JSON.stringify({ msg: message, author: localStorage.getItem('user-name') || 'Anonymous' }));
       }
 
       inputRef.current.value = '';

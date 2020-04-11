@@ -32,6 +32,7 @@ const App = () => {
 
   const retrieveCommand = (message) => {
     if (message.command === 'video') {
+      console.log(message.argument);
       localStorage.setItem('last-video', message.argument);
       setSrcVideo(message.argument);
     }
