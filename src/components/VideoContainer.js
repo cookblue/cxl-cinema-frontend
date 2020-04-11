@@ -6,13 +6,18 @@ import Video from './Video'
 
 const useStyles = makeStyles({
   videoContainer: {
-    position: 'relative',
     width: '100%',
     height: '92vh',
     background: 'black',
     display: 'flex',
+    alignItems: 'center',
   },
-})
+  chatContainer: {
+    position: 'relative',
+    height: '70%',
+    display: 'flex'
+  }
+});
 
 const VideoContainer = React.forwardRef(({ messages, srcVideo }, ref) => {
   const classes = useStyles()
@@ -20,7 +25,7 @@ const VideoContainer = React.forwardRef(({ messages, srcVideo }, ref) => {
   return (
     <Box className={classes.videoContainer} >
       <Video srcVideo={srcVideo} />
-      <Box style={{ position: 'absolute' }}>
+      <Box className={classes.chatContainer}>
         <ChatCard messages={messages} ref={ref} />
       </Box>
     </Box >

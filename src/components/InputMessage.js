@@ -7,29 +7,33 @@ import SendIcon from '@material-ui/icons/Send';
 
 const useStyles = makeStyles({
   containerInput: {
-    width: '100%',
-    height: '100vh',
-    background: '#a9a7a78f',
+    width: '35%',
+    background: '#0d0d0d',
     display: 'flex',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    border: '1px solid #5a5a5a',
+    borderRadius: '5px',
+    margin: '10px auto'
   },
   emoji: {
-    width: '5%',
+    width: '50px',
     background: 'transparent',
+    color: '#c0c0c0',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center'
   },
   submit: {
-    width: '5%',
+    width: '50px',
     background: 'transparent',
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    color: '#c0c0c0'
   },
   input: {
-    width: '90%',
-
+    width: '95%',
+    color: '#c0c0c0',
   }
 });
 

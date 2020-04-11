@@ -7,7 +7,6 @@ import MessageCard from './MessageCard'
 const useStyles = makeStyles({
   container: {
     width: '40vh',
-    height: '80vh',
     background: 'transparent',
     display: 'flex',
     overflow: 'scroll',
@@ -20,7 +19,7 @@ const useStyles = makeStyles({
   },
 });
 
-const TIME_TO_DISAPPEAR = 6500;
+const TIME_TO_DISAPPEAR = 65000000;
 
 const FadeCard = ({ message }) => {
   const { messageContainer } = useStyles();
