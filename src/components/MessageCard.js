@@ -44,6 +44,7 @@ const useStyles = makeStyles({
 
 function MessageCard({ message, author }) {
   const classes = useStyles()
+  const colors = ['#0baf15', '#FD5B78', '#FF6037', '#FF9966', '#FF9933', '#FFCC33', '#FFFF66', '#CCFF00', '#66FF66', '#50BFE6', '#FF6EFF', '#EE34D2', '#FF00CC', '#20d0a8'];
 
   return (
     <Card className={classes.card}>
@@ -51,7 +52,7 @@ function MessageCard({ message, author }) {
         <Avatar className={classes.avatar} />
       </Box>
       <Box className={classes.messageContainer}>
-        <Typography className={classes.author}>
+        <Typography className={classes.author} style={{ color: colors[9] }}>
           {author}
         </Typography>
         <Typography className={classes.message}>
