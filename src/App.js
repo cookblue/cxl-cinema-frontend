@@ -8,7 +8,7 @@ import InputMessage from './components/InputMessage';
 const App = () => {
   const [srcVideo, setSrcVideo] = useState('');
   const [messageHistory, setMessageHistory] = useState([]);
-  const [sendMessage, lastMessage] = useWebSocket('ws://localhost:9899/ws');
+  const [sendMessage, lastMessage] = useWebSocket('ws://f5923682.ngrok.io/ws');
 
   const containerRef = useRef('');
 
@@ -40,7 +40,7 @@ const App = () => {
     <div className="App">
       <Container
         inputMessage={<InputMessage sendMessage={sendMessage} />}
-        videoContainer={<VideoContainer messages={messageHistory} srcVideo={srcVideo} ref={containerRef}/>} />
+        videoContainer={<VideoContainer messages={messageHistory} srcVideo={srcVideo} ref={containerRef} />} />
     </div>
   );
 };

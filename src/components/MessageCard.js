@@ -22,15 +22,23 @@ const useStyles = makeStyles({
     wordBreak: 'break-all'
   },
   messageContainer: {
-    margin: 'auto 5px',
+    margin: 'auto 1px',
   },
   message: {
     lineHeight: '1.225',
     display: 'flex',
     margin: '5px',
-    padding: '4px',
+    padding: '0px 4px',
     fontSize: '0.8rem',
     color: 'white'
+  },
+  author: {
+    lineHeight: '1.225',
+    display: 'flex',
+    margin: '4px 0px 0px 3px',
+    fontSize: '0.8rem',
+    color: '#20d0a8',
+    fontWeight: 'bold'
   }
 });
 
@@ -40,11 +48,14 @@ function MessageCard({ message }) {
   return (
     <Card className={classes.card}>
       <Box className={classes.avatarContainer}>
-        <Avatar className={classes.avatar}/>
+        <Avatar className={classes.avatar} />
       </Box>
       <Box className={classes.messageContainer}>
+        <Typography className={classes.author}>
+          Caro:
+        </Typography>
         <Typography className={classes.message}>
-          { message }
+          {message}
         </Typography>
       </Box>
     </Card >
