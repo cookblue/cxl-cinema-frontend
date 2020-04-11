@@ -9,12 +9,14 @@ const App = () => {
   const [srcVideo, setSrcVideo] = useState('');
   const [messageHistory, setMessageHistory] = useState([]);
 
+  const SOCKET_URL = 'ws://f5923682.ngrok.io/ws';
+
   const STATIC_OPTIONS = useMemo(() => ({
     onOpen: () => console.log('Connection opened!'),
     shouldReconnect: (closeEvent) => true, //Will attempt to reconnect on all close events, such as server shutting down
   }), []);
 
-  const [sendMessage, lastMessage] = useWebSocket('ws://localhost:9899/ws', STATIC_OPTIONS);
+  const [sendMessage, lastMessage] = useWebSocket(SOCKET_URL, STATIC_OPTIONS);
 
   const containerRef = useRef('');
 
@@ -33,6 +35,9 @@ const App = () => {
       localStorage.setItem('last-video', message.argument);
       setSrcVideo(message.argument);
     }
+    if (message.command === 'set-name') {
+      localStorage.setItem('user-name', message.argument);
+    }
   };
 
   useEffect(() => {
@@ -47,7 +52,7 @@ const App = () => {
     <div className="App">
       <Container
         inputMessage={<InputMessage sendMessage={sendMessage} />}
-        videoContainer={<VideoContainer messages={messageHistory} srcVideo={srcVideo} ref={containerRef}/>} />
+        videoContainer={<VideoContainer messages={messageHistory} srcVideo={srcVideo} ref={containerRef} />} />
     </div>
   );
 };

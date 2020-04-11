@@ -44,7 +44,7 @@ const InputMessage = ({ sendMessage } ) => {
 
   const submitMessage = ({ value, charCode }, inputRef) => {
     if (charCode === 13 && value.trim() !== '') {
-      sendMessage(JSON.stringify({ msg: value, author: 'anon' }));
+      sendMessage(JSON.stringify({ msg: value, author: localStorage.getItem('user-name') || 'anon' }));
       inputRef.current.value = '';
     }
   };
