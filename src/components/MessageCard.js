@@ -22,12 +22,12 @@ const useStyles = makeStyles({
     wordBreak: 'break-all'
   },
   messageContainer: {
-    margin: 'auto 1px',
+    margin: 'auto 4px',
   },
   message: {
     lineHeight: '1.225',
     display: 'flex',
-    margin: '5px',
+    margin: '5px 0px',
     padding: '0px 4px',
     fontSize: '0.8rem',
     color: 'white'
@@ -42,7 +42,7 @@ const useStyles = makeStyles({
   }
 });
 
-function MessageCard({ message }) {
+function MessageCard({ message, author }) {
   const classes = useStyles()
 
   return (
@@ -52,7 +52,7 @@ function MessageCard({ message }) {
       </Box>
       <Box className={classes.messageContainer}>
         <Typography className={classes.author}>
-          Caro:
+          {author}
         </Typography>
         <Typography className={classes.message}>
           {message}

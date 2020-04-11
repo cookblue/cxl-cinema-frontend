@@ -21,7 +21,7 @@ const useStyles = makeStyles({
 
 const TIME_TO_DISAPPEAR = 65000000;
 
-const FadeCard = ({ message }) => {
+const FadeCard = ({ message, author }) => {
   const { messageContainer } = useStyles();
   const [visible, setVisible] = useState(false);
 
@@ -36,7 +36,7 @@ const FadeCard = ({ message }) => {
     <>
       <Fade when={visible}>
         <Box className={messageContainer}>
-          <MessageCard message={message} />
+          <MessageCard message={message} author={author} />
         </Box>
       </Fade>
     </>);
@@ -51,7 +51,7 @@ const ChatCard = React.forwardRef(({ messages }, ref) => {
         messages.map((message, idx) => {
           const indexToShow = messages.length > 20 ? messages.length - 20 : 0;
 
-          return message.msg && idx >= indexToShow && <FadeCard key={idx} message={message.msg} />
+          return message.msg && idx >= indexToShow && <FadeCard key={idx} message={message.msg} author={message.author} />
         })
       }
     </div>
