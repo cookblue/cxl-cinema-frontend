@@ -43,9 +43,6 @@ const useStyles = makeStyles({
   }
 });
 
-
-
-
 function MessageCard({ message, author, color, avatar }) {
   const classes = useStyles();
 
