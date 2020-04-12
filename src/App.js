@@ -9,7 +9,7 @@ const App = () => {
   const [srcVideo, setSrcVideo] = useState('');
   const [messageHistory, setMessageHistory] = useState([]);
 
-  const SOCKET_URL = 'ws://f5923682.ngrok.io/ws';
+  const SOCKET_URL = 'wss://mighty-sea-25999.herokuapp.com/ws';
 
   const STATIC_OPTIONS = useMemo(() => ({
     onOpen: () => console.log('Connection opened!'),
