@@ -5,7 +5,6 @@ import { IconButton, InputBase } from '@material-ui/core';
 import MoodIcon from '@material-ui/icons/Mood';
 import SendIcon from '@material-ui/icons/Send';
 
-
 const useStyles = makeStyles({
   containerInput: {
     width: '35%',
