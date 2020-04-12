@@ -1,11 +1,12 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
+import ReactPlayer from 'react-player';
 
 const useStyles = makeStyles({
   video: {
-    height: '92vh',
+    width: '100% !important',
+    height: 'inherit !important',
     position: 'absolute',
-    width: '100%'
   }
 })
 
@@ -19,11 +20,7 @@ const Video = ({ srcVideo }) => {
   }, [])
 
   return (
-    <video controls={true} className={classes.video} src={ srcVideo || lastVideo } autoPlay={true}>
-      <source
-        src={srcVideo || lastVideo}
-        type="video/mp4" />
-    </video>
+    <ReactPlayer className={classes.video} url={srcVideo || lastVideo} playing controls />
   )
 };
 
