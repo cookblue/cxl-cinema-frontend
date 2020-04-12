@@ -4,12 +4,13 @@ import useWebSocket from 'react-use-websocket';
 import Container from './components/Container';
 import VideoContainer from './components/VideoContainer';
 import InputMessage from './components/InputMessage';
+import ContainerRoom from './components/ContainerRoom'
 
 const App = () => {
   const [srcVideo, setSrcVideo] = useState('');
   const [messageHistory, setMessageHistory] = useState([]);
 
-  const SOCKET_URL = 'ws://f5923682.ngrok.io/ws';
+  const SOCKET_URL = 'ws://aad48782.ngrok.io/ws';
 
   const STATIC_OPTIONS = useMemo(() => ({
     onOpen: () => console.log('Connection opened!'),
@@ -48,6 +49,7 @@ const App = () => {
 
   return (
     <div className="App">
+      <ContainerRoom />
       <Container
         inputMessage={<InputMessage sendMessage={sendMessage} />}
         videoContainer={<VideoContainer messages={messageHistory} srcVideo={srcVideo} ref={containerRef} />} />

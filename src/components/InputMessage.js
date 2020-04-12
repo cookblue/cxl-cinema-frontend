@@ -5,6 +5,7 @@ import { IconButton, InputBase } from '@material-ui/core';
 import MoodIcon from '@material-ui/icons/Mood';
 import SendIcon from '@material-ui/icons/Send';
 
+
 const useStyles = makeStyles({
   containerInput: {
     width: '35%',
@@ -47,7 +48,7 @@ const palette = [
 
 const myColor = palette[Math.round(Math.random() * palette.length)];
 
-const InputMessage = ({ sendMessage } ) => {
+const InputMessage = ({ sendMessage }) => {
   const classes = useStyles();
 
   const inputMessageRef = useRef('');
@@ -83,9 +84,9 @@ const InputMessage = ({ sendMessage } ) => {
         <MoodIcon size='small' />
       </IconButton>
       <InputBase className={classes.input}
-                 placeholder='Write a message'
-                 onKeyPress={({ target: { value }, charCode }) => submitMessage({ value, charCode }, inputMessageRef )}
-                 inputRef={inputMessageRef}/>
+        placeholder='Write a message'
+        onKeyPress={({ target: { value }, charCode }) => submitMessage({ value, charCode }, inputMessageRef)}
+        inputRef={inputMessageRef} />
       <IconButton className={classes.submit} aria-label='send'>
         <SendIcon size='small' />
       </IconButton>
