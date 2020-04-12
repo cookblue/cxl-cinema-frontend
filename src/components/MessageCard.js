@@ -51,12 +51,12 @@ function MessageCard({ message, author, color, avatar }) {
 
   return (
     <Card className={classes.card}>
-      { avatar && <Box className={classes.avatarContainer}>
+      {avatar && <Box className={classes.avatarContainer}>
         <Avatar className={classes.avatar} />
-      </Box> }
+      </Box>}
       <Box className={classes.messageContainer}>
         <Typography className={classes.author}
-                    style={{ color: color }}>
+          style={{ color: color }}>
           {author}
         </Typography>
         <Typography className={classes.message}>

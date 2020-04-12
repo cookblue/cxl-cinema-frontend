@@ -4,6 +4,7 @@ import useWebSocket from 'react-use-websocket';
 import Container from './components/Container';
 import VideoContainer from './components/VideoContainer';
 import InputMessage from './components/InputMessage';
+import ContainerRoom from './components/ContainerRoom'
 
 const App = () => {
   const [srcVideo, setSrcVideo] = useState('');
@@ -48,6 +49,7 @@ const App = () => {
 
   return (
     <div className="App">
+      <ContainerRoom />
       <Container
         inputMessage={<InputMessage sendMessage={sendMessage} />}
         videoContainer={<VideoContainer messages={messageHistory} srcVideo={srcVideo} ref={containerRef} />} />
