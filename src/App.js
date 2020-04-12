@@ -11,7 +11,9 @@ const App = () => {
   const [ current, setCurrent ] = useState(true);
   const [messageHistory, setMessageHistory] = useState([]);
 
-  const SOCKET_URL = 'wss://mighty-sea-25999.herokuapp.com/ws';
+  // const SOCKET_URL = 'wss://mighty-sea-25999.herokuapp.com/ws';
+
+  const SOCKET_URL = 'ws://localhost:9899/ws?room=default';
 
   const STATIC_OPTIONS = useMemo(() => ({
     onOpen: () => console.log('Connection opened!'),
