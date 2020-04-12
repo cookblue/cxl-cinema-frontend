@@ -10,8 +10,9 @@ const useStyles = makeStyles({
   }
 })
 
-const Video = ({ srcVideo }) => {
+const Video = ({ srcVideo, sendMessage, current }) => {
   const [ lastVideo, setLastVideo ] = useState('');
+  const [ isPlaying, setIsPlaying ] = useState(true);
 
   const classes = useStyles();
 
@@ -19,8 +20,19 @@ const Video = ({ srcVideo }) => {
     setLastVideo(localStorage.getItem('last-video'));
   }, [])
 
+  useEffect(() => {
+    setIsPlaying(current);
+  }, [current]);
+
+  const pauseHandler = () => {
+    isPlaying && sendMessage(JSON.stringify({ msg: '/pause video'  }));
+  };
+  const payHandler = () => {
+    !isPlaying && sendMessage(JSON.stringify({ msg: '/play video'  }));
+  };
+
   return (
-    <ReactPlayer className={classes.video} url={srcVideo || lastVideo} playing controls />
+    <ReactPlayer className={classes.video} url={srcVideo || lastVideo} playing={isPlaying} controls onPause={pauseHandler} onPlay={payHandler}/>
   )
 };
 

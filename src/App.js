@@ -8,6 +8,7 @@ import ContainerRoom from './components/ContainerRoom'
 
 const App = () => {
   const [srcVideo, setSrcVideo] = useState('');
+  const [ current, setCurrent ] = useState(true);
   const [messageHistory, setMessageHistory] = useState([]);
 
   const SOCKET_URL = 'wss://mighty-sea-25999.herokuapp.com/ws';
@@ -33,9 +34,14 @@ const App = () => {
 
   const retrieveCommand = (message) => {
     if (message.command === 'video') {
-      console.log(message.argument);
       localStorage.setItem('last-video', message.argument);
       setSrcVideo(message.argument);
+    }
+    if (message.command === 'pause') {
+      setCurrent(false);
+    }
+    if (message.command === 'play') {
+      setCurrent(true);
     }
   };
 
@@ -52,7 +58,11 @@ const App = () => {
       <ContainerRoom />
       <Container
         inputMessage={<InputMessage sendMessage={sendMessage} />}
-        videoContainer={<VideoContainer messages={messageHistory} srcVideo={srcVideo} ref={containerRef} />} />
+        videoContainer={<VideoContainer messages={messageHistory}
+                                        current={current}
+                                        sendMessage={sendMessage}
+                                        srcVideo={srcVideo}
+                                        ref={containerRef} />} />
     </div>
   );
 };
