@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
-import { Button } from '@material-ui/core';
+import { Button, Box } from '@material-ui/core';
 
 const useStyles = makeStyles({
   button: {
@@ -11,7 +11,7 @@ const useStyles = makeStyles({
     border: '1px solid #c0c0c0',
     fontWeight: 'lighter',
     color: '#bbb8b8'
-  }
+  },
 })
 
 const OptionsMenu = ({ create, join }) => {
