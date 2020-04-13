@@ -16,8 +16,8 @@ const MessageProvider = ({ children }) => {
     shouldReconnect: (closeEvent) => true, //Will attempt to reconnect on all close events, such as server shutting down
   }), []);
 
-  // const SOCKET_URL = 'wss://mighty-sea-25999.herokuapp.com/ws';
-  const SOCKET_URL = 'ws://localhost:9899/ws?room=';
+  const SOCKET_URL = 'wss://mighty-sea-25999.herokuapp.com/ws?room=';
+  // const SOCKET_URL = 'ws://localhost:9899/ws?room=';
 
   const [sendMessageToSocket, lastMessage] = useWebSocket(url, STATIC_OPTIONS);
 
