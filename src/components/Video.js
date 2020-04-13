@@ -13,8 +13,6 @@ const useStyles = makeStyles({
 
 const Video = () => {
   const [ lastVideo, setLastVideo ] = useState('');
-  const [ isPlaying, setIsPlaying ] = useState(true);
-
   const { sendMessage, srcVideo, current } = useContext(MessageContext);
 
   const classes = useStyles();
@@ -23,19 +21,15 @@ const Video = () => {
     setLastVideo(localStorage.getItem('last-video'));
   }, [])
 
-  useEffect(() => {
-    setIsPlaying(current);
-  }, [current]);
-
   const pauseHandler = () => {
-    isPlaying && sendMessage(JSON.stringify({ msg: '/pause video'  }));
+    current && sendMessage(JSON.stringify({ msg: '/pause video'  }));
   };
   const payHandler = () => {
-    !isPlaying && sendMessage(JSON.stringify({ msg: '/play video'  }));
+    !current && sendMessage(JSON.stringify({ msg: '/play video'  }));
   };
 
   return (
-    <ReactPlayer className={classes.video} url={srcVideo || lastVideo} playing={isPlaying} controls onPause={pauseHandler} onPlay={payHandler}/>
+    <ReactPlayer className={classes.video} url={srcVideo || lastVideo} playing={current} controls onPause={pauseHandler} onPlay={payHandler}/>
   )
 };
 
