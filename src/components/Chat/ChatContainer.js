@@ -1,9 +1,9 @@
-import React, {useContext, useEffect, useState, useRef} from 'react'
+import React, { useContext, useEffect, useState, useRef } from 'react'
 import Fade from 'react-reveal/Fade';
 import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
 import MessageCard from './MessageCard'
-import MessageContext from "../MessageContext/MessageContext";
+import MessageContext from "../../MessageContext/MessageContext";
 
 const useStyles = makeStyles({
   container: {
@@ -37,13 +37,13 @@ const FadeCard = ({ message, author, color, avatar }) => {
     <>
       <Fade when={visible}>
         <Box className={messageContainer}>
-          <MessageCard message={message} author={author} color={color} avatar={avatar}/>
+          <MessageCard message={message} author={author} color={color} avatar={avatar} />
         </Box>
       </Fade>
     </>);
 };
 
-const ChatCard = () => {
+const ChatContainer = () => {
   const classes = useStyles();
   const { messageHistory: messages } = useContext(MessageContext);
 
@@ -63,14 +63,14 @@ const ChatCard = () => {
 
           return message.msg && idx >= indexToShow &&
             <FadeCard key={idx}
-                      message={message.msg}
-                      author={message.author}
-                      color={message.color}
-                      avatar={message.avatar} />
+              message={message.msg}
+              author={message.author}
+              color={message.color}
+              avatar={message.avatar} />
         })
       }
     </div>
   )
 };
 
-export default ChatCard
+export default ChatContainer

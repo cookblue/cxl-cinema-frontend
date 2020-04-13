@@ -1,7 +1,7 @@
-import React, {useContext, useEffect, useState} from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import ReactPlayer from 'react-player';
-import MessageContext from "../MessageContext/MessageContext";
+import MessageContext from "../../MessageContext/MessageContext";
 
 const useStyles = makeStyles({
   video: {
@@ -12,8 +12,8 @@ const useStyles = makeStyles({
 })
 
 const Video = () => {
-  const [ lastVideo, setLastVideo ] = useState('');
-  const [ isPlaying, setIsPlaying ] = useState(true);
+  const [lastVideo, setLastVideo] = useState('');
+  const [isPlaying, setIsPlaying] = useState(true);
 
   const { sendMessage, srcVideo, current } = useContext(MessageContext);
 
@@ -28,14 +28,14 @@ const Video = () => {
   }, [current]);
 
   const pauseHandler = () => {
-    isPlaying && sendMessage(JSON.stringify({ msg: '/pause video'  }));
+    isPlaying && sendMessage(JSON.stringify({ msg: '/pause video' }));
   };
   const payHandler = () => {
-    !isPlaying && sendMessage(JSON.stringify({ msg: '/play video'  }));
+    !isPlaying && sendMessage(JSON.stringify({ msg: '/play video' }));
   };
 
   return (
-    <ReactPlayer className={classes.video} url={srcVideo || lastVideo} playing={isPlaying} controls onPause={pauseHandler} onPlay={payHandler}/>
+    <ReactPlayer className={classes.video} url={srcVideo || lastVideo} playing={isPlaying} controls onPause={pauseHandler} onPlay={payHandler} />
   )
 };
 

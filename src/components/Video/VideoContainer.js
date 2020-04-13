@@ -1,7 +1,7 @@
 import React from 'react'
 import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
-import ChatCard from './ChatCard';
+import ChatContainer from '../Chat/ChatContainer';
 import Video from './Video'
 
 const useStyles = makeStyles({
@@ -27,7 +27,7 @@ const VideoContainer = () => {
     <Box className={classes.videoContainer} >
       <Video />
       <Box className={classes.chatContainer}>
-        <ChatCard />
+        <ChatContainer />
       </Box>
     </Box >
   )
