@@ -11,7 +11,7 @@ const useStyles = makeStyles({
   },
 })
 
-const ContainerRoom = () => {
+const RoomContainer = () => {
   const classes = useStyles();
   const [open, setOpen] = useState(true)
 
@@ -28,4 +28,4 @@ const ContainerRoom = () => {
   )
 };
 
-export default ContainerRoom
+export default RoomContainer

@@ -1,11 +1,11 @@
-import React, {useContext, useRef} from 'react';
+import React, { useContext, useRef } from 'react';
 import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
 import { IconButton, InputBase } from '@material-ui/core';
 import MoodIcon from '@material-ui/icons/Mood';
 import SendIcon from '@material-ui/icons/Send';
 
-import MessageContext from "../MessageContext/MessageContext";
+import MessageContext from "../../MessageContext/MessageContext";
 
 const useStyles = makeStyles({
   containerInput: {
