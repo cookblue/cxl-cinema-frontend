@@ -20,17 +20,17 @@ const useStyles = makeStyles({
   }
 });
 
-const VideoContainer = React.forwardRef(({ messages, srcVideo, current, sendMessage }, ref) => {
-  const classes = useStyles()
+const VideoContainer = () => {
+  const classes = useStyles();
 
   return (
     <Box className={classes.videoContainer} >
-      <Video srcVideo={srcVideo} sendMessage={sendMessage} current={current} />
+      <Video />
       <Box className={classes.chatContainer}>
-        <ChatCard messages={messages} ref={ref} />
+        <ChatCard />
       </Box>
     </Box >
   )
-});
+};
 
 export default VideoContainer

@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
-import useWebSocket from 'react-use-websocket';
+import React from 'react';
+import MessageProvider from "./MessageContext/MessageProvider";
 
 import Container from './components/Container';
 import VideoContainer from './components/VideoContainer';
@@ -7,63 +7,14 @@ import InputMessage from './components/InputMessage';
 import ContainerRoom from './components/ContainerRoom'
 
 const App = () => {
-  const [srcVideo, setSrcVideo] = useState('');
-  const [ current, setCurrent ] = useState(true);
-  const [messageHistory, setMessageHistory] = useState([]);
-
-  const SOCKET_URL = 'wss://mighty-sea-25999.herokuapp.com/ws';
-
-  const STATIC_OPTIONS = useMemo(() => ({
-    onOpen: () => console.log('Connection opened!'),
-    shouldReconnect: (closeEvent) => true, //Will attempt to reconnect on all close events, such as server shutting down
-  }), []);
-
-  const [sendMessage, lastMessage] = useWebSocket(SOCKET_URL, STATIC_OPTIONS);
-
-  const containerRef = useRef('');
-
-  const retrieveMessage = (message, containerRef) => {
-    setMessageHistory(prev => {
-      return [...prev, message]
-    });
-
-    setTimeout(() => {
-      containerRef.current.scrollTop = 10000000000000000000000;
-    }, 150);
-  };
-
-  const retrieveCommand = (message) => {
-    if (message.command === 'video') {
-      localStorage.setItem('last-video', message.argument);
-      setSrcVideo(message.argument);
-    }
-    if (message.command === 'pause') {
-      setCurrent(false);
-    }
-    if (message.command === 'play') {
-      setCurrent(true);
-    }
-  };
-
-  useEffect(() => {
-    if (lastMessage !== null) {
-      const last = JSON.parse(lastMessage.data);
-
-      last.msg ? retrieveMessage(last, containerRef) : retrieveCommand(last);
-    }
-  }, [lastMessage]);
-
   return (
-    <div className="App">
+    <MessageProvider>
       <ContainerRoom />
       <Container
-        inputMessage={<InputMessage sendMessage={sendMessage} />}
-        videoContainer={<VideoContainer messages={messageHistory}
-                                        current={current}
-                                        sendMessage={sendMessage}
-                                        srcVideo={srcVideo}
-                                        ref={containerRef} />} />
-    </div>
+        inputMessage={<InputMessage />}
+        videoContainer={<VideoContainer />}
+      />
+    </MessageProvider>
   );
 };
 

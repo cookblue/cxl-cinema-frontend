@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import ReactPlayer from 'react-player';
+import MessageContext from "../MessageContext/MessageContext";
 
 const useStyles = makeStyles({
   video: {
@@ -10,9 +11,11 @@ const useStyles = makeStyles({
   }
 })
 
-const Video = ({ srcVideo, sendMessage, current }) => {
+const Video = () => {
   const [ lastVideo, setLastVideo ] = useState('');
   const [ isPlaying, setIsPlaying ] = useState(true);
+
+  const { sendMessage, srcVideo, current } = useContext(MessageContext);
 
   const classes = useStyles();
 

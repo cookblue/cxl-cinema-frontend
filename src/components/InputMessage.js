@@ -1,9 +1,11 @@
-import React, { useRef } from 'react';
+import React, {useContext, useRef} from 'react';
 import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
 import { IconButton, InputBase } from '@material-ui/core';
 import MoodIcon from '@material-ui/icons/Mood';
 import SendIcon from '@material-ui/icons/Send';
+
+import MessageContext from "../MessageContext/MessageContext";
 
 const useStyles = makeStyles({
   containerInput: {
@@ -47,7 +49,8 @@ const palette = [
 
 const myColor = palette[Math.round(Math.random() * palette.length)];
 
-const InputMessage = ({ sendMessage }) => {
+const InputMessage = () => {
+  const { sendMessage } = useContext(MessageContext);
   const classes = useStyles();
 
   const inputMessageRef = useRef('');
@@ -71,7 +74,7 @@ const InputMessage = ({ sendMessage }) => {
       if (isNameCommand) {
         commandHandler(validInternCommands, message);
       } else {
-        sendMessage(JSON.stringify({ msg: message, color: myColor, author: localStorage.getItem('user-name') || 'Anonymous' }));
+        sendMessage(JSON.stringify({ msg: message, room: 'default', color: myColor, author: localStorage.getItem('user-name') || 'Anonymous' }));
       }
 
       inputRef.current.value = '';

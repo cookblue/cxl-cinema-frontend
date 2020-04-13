@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, {useContext, useEffect, useState, useRef} from 'react'
 import Fade from 'react-reveal/Fade';
 import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
 import MessageCard from './MessageCard'
+import MessageContext from "../MessageContext/MessageContext";
 
 const useStyles = makeStyles({
   container: {
@@ -42,11 +43,20 @@ const FadeCard = ({ message, author, color, avatar }) => {
     </>);
 };
 
-const ChatCard = React.forwardRef(({ messages }, ref) => {
+const ChatCard = () => {
   const classes = useStyles();
+  const { messageHistory: messages } = useContext(MessageContext);
+
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    setTimeout(() => {
+      containerRef.current.scrollTop = 999999999999999999;
+    }, 100);
+  }, [messages]);
 
   return (
-    <div className={classes.container} ref={ref}>
+    <div className={classes.container} ref={containerRef}>
       {
         messages.map((message, idx) => {
           const indexToShow = messages.length > 20 ? messages.length - 20 : 0;
@@ -56,12 +66,11 @@ const ChatCard = React.forwardRef(({ messages }, ref) => {
                       message={message.msg}
                       author={message.author}
                       color={message.color}
-                      avatar={message.avatar}
-            />
+                      avatar={message.avatar} />
         })
       }
     </div>
   )
-});
+};
 
 export default ChatCard

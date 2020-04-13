@@ -18,7 +18,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Container = React.forwardRef(({ videoContainer, inputMessage }) => {
+const Container = ({videoContainer, inputMessage }) => {
   const classes = useStyles();
 
   return (
@@ -29,6 +29,6 @@ const Container = React.forwardRef(({ videoContainer, inputMessage }) => {
       {inputMessage}
     </Box>
   );
-});
+};
 
 export default Container
