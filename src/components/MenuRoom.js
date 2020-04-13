@@ -38,24 +38,25 @@ const MenuRoom = ({ close }) => {
       join: true,
     })
   }
+  const handleBackMenu = () => {
+    setFlag({
+      ...flag,
+      create: false,
+      join: false
+    })
+  }
 
   return (
-    <Box>
+    <Box className={classes.box}>
       {
         flag.create
           ?
-          <Box className={classes.box}>
-            <CreateRoom close={close} />
-          </Box>
+          <CreateRoom close={close} back={handleBackMenu} />
           : flag.join
             ?
-            <Box className={classes.box}>
-              <JoinRoom close={close} />
-            </Box>
+            <JoinRoom close={close} back={handleBackMenu} />
             :
-            <Box className={classes.box}>
-              <OptionsMenu create={handleCreate} join={handleJoin} />
-            </Box>
+            <OptionsMenu create={handleCreate} join={handleJoin} />
       }
     </Box>
   )
