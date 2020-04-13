@@ -1,8 +1,10 @@
-import React from 'react'
+import React, {useContext, useRef} from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import { InputBase, Button, Box } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import IconButton from '@material-ui/core/IconButton';
+
+import MessageContext from '../../MessageContext/MessageContext';
 
 const useStyles = makeStyles({
   input: {
@@ -41,6 +43,16 @@ const useStyles = makeStyles({
 })
 const CreateRoom = ({ close, back }) => {
   const classes = useStyles()
+
+  const { setRoomName } = useContext(MessageContext);
+
+  const createRoom = (ref) => {
+    setRoomName(ref.current.value);
+    close();
+  };
+
+  const inputRef = useRef('');
+
   return (
     <Box className={classes.box}>
       <Box className={classes.head} >
@@ -49,9 +61,9 @@ const CreateRoom = ({ close, back }) => {
         </IconButton>
       </Box>
       <Box className={classes.body}>
-        <InputBase className={classes.input} placeholder='Create a room name'>
+        <InputBase className={classes.input} placeholder='Create a room name' inputRef={inputRef}>
         </InputBase>
-        <Button variant='contained' color='secondary' onClick={close}>
+        <Button variant='contained' color='secondary' onClick={() => createRoom(inputRef)}>
           Create
        </Button>
       </Box>

@@ -23,10 +23,10 @@ const Video = () => {
   }, [])
 
   const pauseHandler = () => {
-    current && sendMessage(JSON.stringify({ msg: '/pause video'  }));
+    current && sendMessage({ msg: '/pause video'  });
   };
   const payHandler = () => {
-    !current && sendMessage(JSON.stringify({ msg: '/play video'  }));
+    !current && sendMessage({ msg: '/play video'  });
   };
 
   return (

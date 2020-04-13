@@ -4,18 +4,34 @@ import useWebSocket from 'react-use-websocket';
 import MessageContext from './MessageContext';
 
 const MessageProvider = ({ children }) => {
+  const [ url, setUrl ] = useState('wss://echo.websocket.org');
   const [srcVideo, setSrcVideo] = useState('');
   const [ current, setCurrent ] = useState(true);
+  const [ roomName, setRoomName ] = useState('');
   const [messageHistory, setMessageHistory] = useState([]);
 
   const STATIC_OPTIONS = useMemo(() => ({
     onOpen: () => console.log('Connection opened!'),
+    share: true,
     shouldReconnect: (closeEvent) => true, //Will attempt to reconnect on all close events, such as server shutting down
   }), []);
 
   // const SOCKET_URL = 'wss://mighty-sea-25999.herokuapp.com/ws';
-  const SOCKET_URL = 'ws://localhost:9899/ws?room=default';
-  const [sendMessage, lastMessage] = useWebSocket(SOCKET_URL, STATIC_OPTIONS);
+  const SOCKET_URL = 'ws://localhost:9899/ws?room=';
+
+  const [sendMessageToSocket, lastMessage] = useWebSocket(url, STATIC_OPTIONS);
+
+  useEffect(() => {
+    if (roomName) setUrl(SOCKET_URL + roomName);
+  }, [roomName])
+
+  useEffect(() => {
+    if (lastMessage !== null) {
+      const last = JSON.parse(lastMessage.data);
+
+      last.msg ? retrieveMessage(last) : retrieveCommand(last);
+    }
+  }, [lastMessage]);
 
   const retrieveMessage = (message) => {
     setMessageHistory(prev => {
@@ -36,21 +52,18 @@ const MessageProvider = ({ children }) => {
     }
   };
 
-  useEffect(() => {
-    if (lastMessage !== null) {
-      const last = JSON.parse(lastMessage.data);
-
-      last.msg ? retrieveMessage(last) : retrieveCommand(last);
-    }
-  }, [lastMessage]);
-
+  const sendMessage = (message) => {
+    sendMessageToSocket(JSON.stringify({ ...message, room: roomName }));
+  }
 
   return (
     <MessageContext.Provider value={{
       sendMessage,
       messageHistory,
       srcVideo,
-      current
+      current,
+      roomName,
+      setRoomName,
     }}>
       { children }
     </MessageContext.Provider>

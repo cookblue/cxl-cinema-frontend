@@ -21,7 +21,6 @@ const useStyles = makeStyles({
 })
 
 const MenuRoom = ({ close }) => {
-  const classes = useStyles()
   const [flag, setFlag] = useState({
     create: false,
     join: false
@@ -45,6 +44,8 @@ const MenuRoom = ({ close }) => {
       join: false
     })
   }
+
+  const classes = useStyles()
 
   return (
     <Box className={classes.box}>

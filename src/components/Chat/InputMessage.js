@@ -74,7 +74,7 @@ const InputMessage = () => {
       if (isNameCommand) {
         commandHandler(validInternCommands, message);
       } else {
-        sendMessage(JSON.stringify({ msg: message, room: 'default', color: myColor, author: localStorage.getItem('user-name') || 'Anonymous' }));
+        sendMessage({ msg: message, color: myColor, author: localStorage.getItem('user-name') || 'Anonymous' });
       }
 
       inputRef.current.value = '';

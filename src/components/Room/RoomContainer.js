@@ -12,8 +12,9 @@ const useStyles = makeStyles({
 })
 
 const RoomContainer = () => {
-  const classes = useStyles();
   const [open, setOpen] = useState(true)
+
+  const classes = useStyles();
 
   const handleClose = () => {
     setOpen(false)
