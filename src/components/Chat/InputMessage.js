@@ -50,7 +50,7 @@ const palette = [
 const myColor = palette[Math.round(Math.random() * palette.length)];
 
 const InputMessage = () => {
-  const { sendMessage } = useContext(MessageContext);
+  const { sendMessage, readyState } = useContext(MessageContext);
   const classes = useStyles();
 
   const inputMessageRef = useRef('');
@@ -68,7 +68,7 @@ const InputMessage = () => {
   const submitMessage = ({ value, charCode }, inputRef) => {
     const message = value.trim();
 
-    if (charCode === 13 && message !== '') {
+    if (charCode === 13 && message !== '' && readyState === 1) {
       const isNameCommand = message.split('/name')[1];
 
       if (isNameCommand) {

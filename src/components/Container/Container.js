@@ -9,24 +9,15 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
     background: 'black'
-  },
-  chatVideo: {
-    display: 'flex',
-    flexDirection: 'row',
-    width: '100%',
-    height: '100vh'
-  },
+  }
 });
 
-const Container = ({videoContainer, inputMessage }) => {
+const Container = ({ children }) => {
   const classes = useStyles();
 
   return (
     <Box className={classes.container}>
-      <Box className={classes.chatVideo}>
-        {videoContainer}
-      </Box>
-      {inputMessage}
+      { children }
     </Box>
   );
 };

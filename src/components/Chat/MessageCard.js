@@ -30,14 +30,14 @@ const useStyles = makeStyles({
     display: 'flex',
     margin: '5px 0px',
     padding: '0px 4px',
-    fontSize: '0.8rem',
+    fontSize: '1.0rem',
     color: 'white'
   },
   author: {
     lineHeight: '1.225',
     display: 'flex',
     margin: '4px 0px 0px 3px',
-    fontSize: '0.8rem',
+    fontSize: '1.0rem',
     color: '#20d0a8',
     fontWeight: 'bold'
   }
