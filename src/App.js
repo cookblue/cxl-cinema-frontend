@@ -7,15 +7,14 @@ import InputMessage from './components/Chat/InputMessage';
 import RoomContainer from './components/Room/RoomContainer';
 
 const App = () => {
-
   return (
     <>
       <MessageProvider>
         <RoomContainer/>
-        <Container
-          inputMessage={<InputMessage />}
-          videoContainer={<VideoContainer />}
-       />
+        <Container>
+          <VideoContainer />
+          <InputMessage />
+        </Container>
       </MessageProvider>
     </>
   );

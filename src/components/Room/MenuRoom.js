@@ -50,14 +50,9 @@ const MenuRoom = ({ close }) => {
   return (
     <Box className={classes.box}>
       {
-        flag.create
-          ?
-          <CreateRoom close={close} back={handleBackMenu} />
-          : flag.join
-            ?
-            <JoinRoom close={close} back={handleBackMenu} />
-            :
-            <OptionsMenu create={handleCreate} join={handleJoin} />
+        flag.create ? <CreateRoom close={close} back={handleBackMenu} />
+          : flag.join ? <JoinRoom close={close} back={handleBackMenu} />
+            : <OptionsMenu create={handleCreate} join={handleJoin} />
       }
     </Box>
   )

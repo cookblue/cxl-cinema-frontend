@@ -20,7 +20,7 @@ const useStyles = makeStyles({
   },
 });
 
-const TIME_TO_DISAPPEAR = 65000000;
+const TIME_TO_DISAPPEAR = 6500;
 
 const FadeCard = ({ message, author, color, avatar }) => {
   const { messageContainer } = useStyles();
@@ -58,16 +58,13 @@ const ChatContainer = () => {
   return (
     <div className={classes.container} ref={containerRef}>
       {
-        messages.map((message, idx) => {
-          const indexToShow = messages.length > 20 ? messages.length - 20 : 0;
-
-          return message.msg && idx >= indexToShow &&
-            <FadeCard key={idx}
+        messages.map((message) =>
+            <FadeCard key={message.id}
               message={message.msg}
               author={message.author}
               color={message.color}
               avatar={message.avatar} />
-        })
+        )
       }
     </div>
   )

@@ -19,10 +19,10 @@ const OptionsMenu = ({ create, join }) => {
   return (
     <>
       <Button className={classes.button} onClick={create}>
-        Create a Room
+        Create Room
       </Button>
       <Button className={classes.button} onClick={join}>
-        Join a Room
+        Join Room
       </Button>
     </>
   )

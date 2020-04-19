@@ -3,6 +3,14 @@ import useWebSocket from 'react-use-websocket';
 
 import MessageContext from './MessageContext';
 
+const uuidv4 = () => {
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(c) {
+    const r = (Math.random() * 16) | 0,
+      v = c === "x" ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+};
+
 const MessageProvider = ({ children }) => {
   const [ url, setUrl ] = useState('wss://echo.websocket.org');
   const [srcVideo, setSrcVideo] = useState('');
@@ -19,10 +27,15 @@ const MessageProvider = ({ children }) => {
   const SOCKET_URL = 'wss://mighty-sea-25999.herokuapp.com/ws?room=';
   // const SOCKET_URL = 'ws://localhost:9899/ws?room=';
 
-  const [sendMessageToSocket, lastMessage] = useWebSocket(url, STATIC_OPTIONS);
+  const [sendMessageToSocket, lastMessage, readyState] = useWebSocket(url, STATIC_OPTIONS);
 
   useEffect(() => {
-    if (roomName) setUrl(SOCKET_URL + roomName);
+    if (roomName) {
+      setUrl(SOCKET_URL + roomName)
+      setInterval(() => {
+        sendMessageToSocket(JSON.stringify({ msg: '' }));
+      }, 30000);
+    }
   }, [roomName])
 
   useEffect(() => {
@@ -35,7 +48,13 @@ const MessageProvider = ({ children }) => {
 
   const retrieveMessage = (message) => {
     setMessageHistory(prev => {
-      return [...prev, message]
+      if (prev.length > 25) {
+        const [, ...rest] = prev;
+
+        return [...rest, { ...message, id: uuidv4() }];
+      }
+
+      return [...prev, { ...message, id: uuidv4() }]
     });
   };
 
@@ -64,6 +83,7 @@ const MessageProvider = ({ children }) => {
       current,
       roomName,
       setRoomName,
+      readyState,
     }}>
       { children }
     </MessageContext.Provider>
