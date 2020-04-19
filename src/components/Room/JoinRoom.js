@@ -1,4 +1,4 @@
-import React, {useContext, useRef} from 'react'
+import React, { useContext, useRef } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import { InputBase, Button, Box } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
@@ -7,7 +7,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MessageContext from "../../MessageContext/MessageContext";
 
 const useStyles = makeStyles({
-  input: {
+  root: {
     width: '185px',
     fontFamily: 'monospace',
     fontSize: '15px',
@@ -35,9 +35,20 @@ const useStyles = makeStyles({
     width: '100%',
     height: '25vh'
   },
+  input: {
+    textAlign: 'center'
+  },
   box: {
     width: '100%',
     height: '100vh'
+  },
+  btn: {
+    color: 'white',
+    border: '1px solid #191919',
+    fontWeight: 'lighter',
+    width: '10vh',
+    background: '#8a888cbd',
+    borderRadius: '24px'
   }
 })
 
@@ -61,9 +72,17 @@ const JoinRoom = ({ close, back }) => {
         </IconButton>
       </Box>
       <Box className={classes.body}>
-        <InputBase className={classes.input} placeholder='Enter a room name' inputRef={inputRef}>
+        <InputBase
+          classes={{
+            root: classes.root,
+            input: classes.input
+          }}
+          placeholder='Enter a room name'
+          inputRef={inputRef}>
         </InputBase>
-        <Button variant='contained' color='secondary' onClick={() => createRoom(inputRef)}>
+        <Button
+          className={classes.btn}
+          onClick={() => createRoom(inputRef)}>
           Join
         </Button>
       </Box>
