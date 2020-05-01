@@ -33,7 +33,7 @@ const MessageProvider = ({ children }) => {
     if (roomName) {
       setUrl(SOCKET_URL + roomName)
       setInterval(() => {
-        sendMessageToSocket(JSON.stringify({ msg: '' }));
+        sendMessageToSocket(JSON.stringify({ msg: '', room: roomName }));
       }, 30000);
     }
   }, [roomName])
