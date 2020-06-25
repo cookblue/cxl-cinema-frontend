@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import { Modal } from '@material-ui/core';
 import MenuRoom from './MenuRoom'
+import MessageContext from "../../MessageContext/MessageContext";
 
 const useStyles = makeStyles({
   modal: {
@@ -12,7 +13,17 @@ const useStyles = makeStyles({
 })
 
 const RoomContainer = () => {
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState();
+
+  const { roomName } = useContext(MessageContext);
+
+  useEffect(() => {
+    if (roomName) {
+      setOpen(false);
+    } else {
+      setOpen(true);
+    }
+  }, [ roomName ])
 
   const classes = useStyles();
 

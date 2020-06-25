@@ -68,7 +68,7 @@ const InputMessage = () => {
   const submitMessage = ({ value, charCode }, inputRef) => {
     const message = value.trim();
 
-    if (charCode === 13 && message !== '' && readyState === 1) {
+    if (charCode === 13 && message !== '' && readyState) {
       const isNameCommand = message.split('/name')[1];
 
       if (isNameCommand) {

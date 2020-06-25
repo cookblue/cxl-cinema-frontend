@@ -1,7 +1,8 @@
-import React, {useState, useEffect, useMemo} from 'react';
-import useWebSocket from 'react-use-websocket';
+import React, { useState, useEffect } from 'react';
+import { useQueryParam, StringParam } from 'use-query-params';
 
 import MessageContext from './MessageContext';
+import WebsocketManager from '../components/Ws';
 
 const uuidv4 = () => {
   return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(c) {
@@ -12,39 +13,24 @@ const uuidv4 = () => {
 };
 
 const MessageProvider = ({ children }) => {
-  const [ url, setUrl ] = useState('wss://echo.websocket.org');
   const [srcVideo, setSrcVideo] = useState('');
   const [ current, setCurrent ] = useState(true);
   const [ roomName, setRoomName ] = useState('');
+  const [ message, setMessage] = useState('');
   const [messageHistory, setMessageHistory] = useState([]);
+  const [ readyState, setReadyState] = useState(false);
 
-  const STATIC_OPTIONS = useMemo(() => ({
-    onOpen: () => console.log('Connection opened!'),
-    share: true,
-    shouldReconnect: (closeEvent) => true, //Will attempt to reconnect on all close events, such as server shutting down
-  }), []);
+  const [queryRoom] = useQueryParam('room', StringParam);
 
-  const SOCKET_URL = 'wss://mighty-sea-25999.herokuapp.com/ws?room=';
-  // const SOCKET_URL = 'ws://localhost:9899/ws?room=';
-
-  const [sendMessageToSocket, lastMessage, readyState] = useWebSocket(url, STATIC_OPTIONS);
+  const retrieveData = (data) => {
+    data.msg ? retrieveMessage(data) : retrieveCommand(data);
+  }
 
   useEffect(() => {
-    if (roomName) {
-      setUrl(SOCKET_URL + roomName)
-      setInterval(() => {
-        sendMessageToSocket(JSON.stringify({ msg: '', room: roomName }));
-      }, 30000);
+    if (queryRoom) {
+      setRoomName(queryRoom);
     }
-  }, [roomName])
-
-  useEffect(() => {
-    if (lastMessage !== null) {
-      const last = JSON.parse(lastMessage.data);
-
-      last.msg ? retrieveMessage(last) : retrieveCommand(last);
-    }
-  }, [lastMessage]);
+  }, [queryRoom])
 
   const retrieveMessage = (message) => {
     setMessageHistory(prev => {
@@ -72,7 +58,8 @@ const MessageProvider = ({ children }) => {
   };
 
   const sendMessage = (message) => {
-    sendMessageToSocket(JSON.stringify({ ...message, room: roomName }));
+    // The id here shout be generated in the backend side.
+    setMessage(JSON.stringify({ ...message, id: uuidv4(), room: roomName }));
   }
 
   return (
@@ -86,6 +73,15 @@ const MessageProvider = ({ children }) => {
       readyState,
     }}>
       { children }
+      {
+        roomName ?
+          <WebsocketManager
+            roomName={roomName}
+            retrieveData={retrieveData}
+            message={message}
+            setReadyState={setReadyState}
+          /> : <></>
+      }
     </MessageContext.Provider>
   )
 }
