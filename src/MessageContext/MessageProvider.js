@@ -14,6 +14,7 @@ const uuidv4 = () => {
 
 const MessageProvider = ({ children }) => {
   const [srcVideo, setSrcVideo] = useState('');
+  const [ time, setTime] = useState(0.0);
   const [ current, setCurrent ] = useState(true);
   const [ roomName, setRoomName ] = useState('');
   const [ message, setMessage] = useState('');
@@ -44,16 +45,20 @@ const MessageProvider = ({ children }) => {
     });
   };
 
-  const retrieveCommand = (message) => {
-    if (message.command === 'video') {
-      localStorage.setItem('last-video', message.argument);
-      setSrcVideo(message.argument);
+  const retrieveCommand = ({ command, argument }) => {
+    if (command === 'video') {
+      localStorage.setItem('last-video', argument);
+      setSrcVideo(argument);
     }
-    if (message.command === 'pause') {
+    if (command === 'pause') {
       setCurrent(false);
     }
-    if (message.command === 'play') {
+    if (command === 'play') {
       setCurrent(true);
+    }
+
+    if (command === 'seek') {
+      setTime(argument);
     }
   };
 
@@ -68,9 +73,10 @@ const MessageProvider = ({ children }) => {
       messageHistory,
       srcVideo,
       current,
+      time,
       roomName,
       setRoomName,
-      readyState,
+      readyState
     }}>
       { children }
       {
