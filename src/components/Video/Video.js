@@ -15,7 +15,7 @@ const Video = () => {
   const [ lastVideo, setLastVideo ] = useState('');
   const [ playedSeconds, setPlayedSeconds] = useState(0.0);
   const [ player, setPlayer ] = useState(null);
-  const { sendMessage, srcVideo, current, time } = useContext(MessageContext);
+  const { sendMessage, srcVideo, current, time, readyState } = useContext(MessageContext);
 
   const classes = useStyles();
 
@@ -51,7 +51,7 @@ const Video = () => {
 
 
   return (
-    <ReactPlayer
+    readyState && <ReactPlayer
       className={classes.video}
       url={srcVideo || lastVideo}
       playing={current}
